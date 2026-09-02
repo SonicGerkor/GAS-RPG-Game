@@ -1,0 +1,58 @@
+# ---- Unreal Engine generated/build folders ----
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+Platforms/
+
+# ---- Build tool / IDE generated ----
+.vs/
+.vscode/
+.idea/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# ---- Rider specific ----
+.idea/
+*.iml
+
+# ---- Compiled source ----
+*.pdb
+*.obj
+*.o
+*.lib
+*.exp
+*.dll
+*.exe
+
+# ---- Unreal asset/content files (you said no assets, except Blueprints) ----
+Content/*
+*.uasset
+*.umap
+
+# ---- Packaged builds ----
+Saved/StagedBuilds/
+Saved/Cooked/
+
+# ---- Plugins' binaries (keep plugin source, drop their builds) ----
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+
+# ---- Misc OS/editor junk ----
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# ---- Optional: exclude generated project files (regenerate via "Generate Visual Studio project files") ----
+*.xcodeproj
+*.xcworkspace
+
+# ---- Keep Blueprints folder inside Content (must come after the excludes above) ----
+!Content/Blueprints/
+!Content/Blueprints/**
