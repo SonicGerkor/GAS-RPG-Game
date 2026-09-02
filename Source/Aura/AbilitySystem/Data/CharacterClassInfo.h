@@ -7,10 +7,19 @@
 #include "Engine/DataAsset.h"
 #include "CharacterClassInfo.generated.h"
 
-struct FScalableFloat;
 class UCurveTable;
 class UGameplayAbility;
 class UGameplayEffect;
+class UAnimInstance;
+class USkeletalMesh;
+struct FScalableFloat;
+
+UENUM(BlueprintType)
+enum class ECharacterGenderPreset : uint8
+{
+	Male,
+	Female
+};
 
 UENUM(BlueprintType)
 enum class ECharacterClass : uint8
@@ -35,7 +44,19 @@ struct FCharacterClassDefaultInfo
 	FScalableFloat XPReward = FScalableFloat();
 };
 
-UCLASS()
+USTRUCT(BlueprintType)
+struct FCharacterPresetInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Preset")
+	TSoftObjectPtr<USkeletalMesh> Mesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Preset")
+	TSubclassOf<UAnimInstance> AnimClass;
+};
+
+UCLASS(BlueprintType)
 class AURA_API UCharacterClassInfo : public UDataAsset
 {
 	GENERATED_BODY()
@@ -44,6 +65,9 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Character Class Defaults")
 	TMap<ECharacterClass, FCharacterClassDefaultInfo> CharacterClassInfo;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Preset Defaults")
+	TMap<ECharacterGenderPreset, FCharacterPresetInfo> CharacterPresetInfo;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Common Class Defaults")
 	TSubclassOf<UGameplayEffect> PrimaryAttributes_SetByCaller;

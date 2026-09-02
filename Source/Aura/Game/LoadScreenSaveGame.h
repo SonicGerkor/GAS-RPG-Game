@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "Aura/AbilitySystem/Data/CharacterClassInfo.h"
 #include "GameFramework/SaveGame.h"
 #include "LoadScreenSaveGame.generated.h"
 
+enum class ECharacterGenderPreset : uint8;
 struct FGameplayTag;
 class UGameplayAbility;
 
@@ -97,6 +99,9 @@ public:
 	
 	UPROPERTY()
 	FString PlayerName = FString("DefaultPlayerName");
+	
+	UPROPERTY()
+	ECharacterGenderPreset SelectedCharacterPreset = ECharacterGenderPreset::Male; 
 	
 	UPROPERTY()
 	FString MapName = FString("DefaultMapName");

@@ -159,7 +159,7 @@ void AMainPlayerController::AbilityInputTagPressed(const FGameplayTag InputTag)
 {
 	if (GetASC() && GetASC()->HasMatchingGameplayTag(FMainGameplayTags::Get().Player_Block_InputPressed)) return;
 	
-	if (InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_LMB))
+	if (InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_RMB))
 	{
 		if (IsValid(ThisActor))
 		{
@@ -178,7 +178,7 @@ void AMainPlayerController::AbilityInputTagReleased(const FGameplayTag InputTag)
 {
 	if (GetASC() && GetASC()->HasMatchingGameplayTag(FMainGameplayTags::Get().Player_Block_InputReleased)) return;
 	
-	if (!InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_LMB))
+	if (!InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_RMB))
 	{
 		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
 		return;
@@ -221,7 +221,7 @@ void AMainPlayerController::AbilityInputTagHeld(const FGameplayTag InputTag)
 {
 	if (GetASC() && GetASC()->HasMatchingGameplayTag(FMainGameplayTags::Get().Player_Block_InputHeld)) return;
 	
-	if (!InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_LMB))
+	if (!InputTag.MatchesTagExact(FMainGameplayTags::Get().InputTag_RMB))
 	{
 		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 		return;

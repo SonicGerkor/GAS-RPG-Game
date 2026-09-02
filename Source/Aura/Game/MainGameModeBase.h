@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MainGameModeBase.generated.h"
 
+enum class ECharacterGenderPreset : uint8;
 class ULootTiers;
 class ULoadScreenSaveGame;
 class USaveGame;
@@ -60,6 +61,9 @@ public:
 	FString GetMapNameFromMapAssetName(const FString& MapAssetName) const;
 	
 	void PlayerDied(const ACharacter* DeadCharacter);
+	
+	UFUNCTION(BlueprintCallable, Category = "Character Selection")
+	void SetSelectedCharacterPreset(ECharacterGenderPreset Preset);
 	
 protected:
 	

@@ -78,6 +78,21 @@ void AMainCharacter::LoadProgress()
 	ULoadScreenSaveGame* SaveData = MainGameMode->RetrieveInGameSaveData();
 	if (!IsValid(SaveData)) return;
 	
+	if (UCharacterClassInfo* ClassInfo = UMainAbilitySystemLibrary::GetCharacterClassInfo(this))
+	{
+		if (const FCharacterPresetInfo* PresetInfo = ClassInfo->CharacterPresetInfo.Find(SaveData->SelectedCharacterPreset))
+		{
+			if (USkeletalMesh* PresetMesh = PresetInfo->Mesh.LoadSynchronous())
+			{
+				GetMesh()->SetSkeletalMesh(PresetMesh);
+			}
+			if (PresetInfo->AnimClass)
+			{
+				GetMesh()->SetAnimInstanceClass(PresetInfo->AnimClass);
+			}
+		}
+	}
+	
 	AMainPlayerState* MainPlayerState = Cast<AMainPlayerState>(GetPlayerState());
 	if (!IsValid(MainPlayerState)) return;
 	
