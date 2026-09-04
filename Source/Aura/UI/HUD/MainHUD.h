@@ -55,10 +55,4 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<USpellMenuWidgetController> SpellMenuWidgetControllerClass;
-	
-	UPROPERTY()
-	TObjectPtr<UCharSelectionWidgetController> CharacterSelectionWidgetController;
-	
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UCharSelectionWidgetController> CharacterSelectionWidgetControllerClass;
 };

@@ -3,7 +3,6 @@
 #include "MainHUD.h"
 #include "Aura/UI/Widget/MainUserWidget.h"
 #include "Aura/UI/WidgetController/AttributeMenuWidgetController.h"
-#include "Aura/UI/WidgetController/CharSelectionWidgetController.h"
 #include "Aura/UI/WidgetController/OverlayWidgetController.h"
 #include "Aura/UI/WidgetController/SpellMenuWidgetController.h"
 #include "Blueprint/UserWidget.h"
@@ -59,16 +58,4 @@ UAttributeMenuWidgetController* AMainHUD::GetAttributeMenuWidgetController(const
 	}
 	
 	return AttributeMenuWidgetController;
-}
-
-UCharSelectionWidgetController* AMainHUD::GetCharacterSelectionWidgetController(const FWidgetControllerParams& Params)
-{
-	if (CharacterSelectionWidgetController == nullptr)
-	{
-		CharacterSelectionWidgetController = NewObject<UCharSelectionWidgetController>(this, CharacterSelectionWidgetControllerClass);
-		CharacterSelectionWidgetController->SetWidgetControllerParams(Params);
-		CharacterSelectionWidgetController->BindCallbacksToDependencies();
-	}
-	
-	return CharacterSelectionWidgetController;
 }
