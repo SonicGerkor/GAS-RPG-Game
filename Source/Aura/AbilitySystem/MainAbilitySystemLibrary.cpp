@@ -9,6 +9,7 @@
 #include "Aura/Interaction/CombatInterface.h"
 #include "Aura/Player/MainPlayerState.h"
 #include "Aura/UI/HUD/MainHUD.h"
+#include "Aura/UI/WidgetController/CharSelectionWidgetController.h"
 #include "Aura/UI/WidgetController/MainWidgetController.h"
 #include "Data/CharacterClassInfo.h"
 #include "Engine/OverlapResult.h"
@@ -71,6 +72,19 @@ USpellMenuWidgetController* UMainAbilitySystemLibrary::GetSpellMenuWidgetControl
 	if (MakeWidgetControllerParams(WorldContextObject, WCParams, MainHUD))
 	{
 		return MainHUD->GetSpellMenuWidgetController(WCParams);
+	}
+	
+	return nullptr;
+}
+
+UCharSelectionWidgetController* UMainAbilitySystemLibrary::GetCharacterSelectionWidgetController(const UObject* WorldContextObject)
+{
+	FWidgetControllerParams WCParams;
+	AMainHUD* MainHUD;
+
+	if (MakeWidgetControllerParams(WorldContextObject, WCParams, MainHUD))
+	{
+		return MainHUD->GetCharacterSelectionWidgetController(WCParams);
 	}
 	
 	return nullptr;

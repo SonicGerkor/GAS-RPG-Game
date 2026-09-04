@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MainAbilitySystemLibrary.generated.h"
 
+class UCharSelectionWidgetController;
 class ULootTiers;
 class ULoadScreenSaveGame;
 struct FGameplayTag;
@@ -44,7 +45,8 @@ public:
 	UFUNCTION(BlueprintPure, Category = "MainAbilitySystemLibrary|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
 	static USpellMenuWidgetController* GetSpellMenuWidgetController(const UObject* WorldContextObject);
 	
-	
+	UFUNCTION(BlueprintPure, Category = "MainAbilitySystemLibrary|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
+	static UCharSelectionWidgetController* GetCharacterSelectionWidgetController(const UObject* WorldContextObject);
 	/*
 	 * Ability System Class Defaults
 	 */
