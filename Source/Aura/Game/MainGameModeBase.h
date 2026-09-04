@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "MainGameModeBase.generated.h"
 
+enum class ECharacterGenderPreset : uint8;
 class ULootTiers;
 class ULoadScreenSaveGame;
 class USaveGame;
@@ -33,6 +34,9 @@ public:
 	
 	void TravelToMap(UMVVM_LoadSlot* Slot);
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Maps")
+	TSoftObjectPtr<UWorld> CharacterSelectionMap;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Character Class Defaults")
 	TObjectPtr<UCharacterClassInfo> CharacterClassInfo;
 	
@@ -51,7 +55,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Maps")
 	FName DefaultPlayerStartTag;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Maps")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Maps")
 	TSoftObjectPtr<UWorld> StartingMap;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Maps")
@@ -60,6 +64,9 @@ public:
 	FString GetMapNameFromMapAssetName(const FString& MapAssetName) const;
 	
 	void PlayerDied(const ACharacter* DeadCharacter);
+	
+	UFUNCTION(BlueprintCallable, Category = "Character Selection")
+	void SetSelectedCharacterPreset(ECharacterGenderPreset Preset);
 	
 protected:
 	

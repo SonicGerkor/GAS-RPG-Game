@@ -105,7 +105,15 @@ void UMVVM_LoadScreen::LoadGameButtonPressed()
 		
 		if (IsValid(SelectedSlot))
 		{
-			MainGameMode->TravelToMap(SelectedSlot);	
+			const ULoadScreenSaveGame* SaveData = MainGameMode->GetSaveSlotData(SelectedSlot->LoadSlotName, SelectedSlot->LoadSlotIndex);
+			if (IsValid(SaveData) && SaveData->bFirstTime)
+			{
+				UGameplayStatics::OpenLevelBySoftObjectPtr(this, MainGameMode->CharacterSelectionMap);
+			}
+			else
+			{
+				MainGameMode->TravelToMap(SelectedSlot);
+			}
 		}
 	}
 }

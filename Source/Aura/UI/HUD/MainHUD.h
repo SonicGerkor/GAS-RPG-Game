@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "MainHUD.generated.h"
 
+class UCharSelectionWidgetController;
 class USpellMenuWidgetController;
 class UAttributeMenuWidgetController;
 class APlayerState;
@@ -22,10 +23,7 @@ class AURA_API AMainHUD : public AHUD
 	
 public:
 	
-	void InitOverlay(APlayerController* PlayerController, 
-		APlayerState* PlayerState, 
-		UAbilitySystemComponent* AbilitySystemComponent, 
-		UAttributeSet* AttributeSet);
+	void InitOverlay(APlayerController* PlayerController, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet);
 	
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& Params);
 	USpellMenuWidgetController* GetSpellMenuWidgetController(const FWidgetControllerParams& Params);

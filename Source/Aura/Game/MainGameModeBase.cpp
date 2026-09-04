@@ -239,3 +239,12 @@ void AMainGameModeBase::PlayerDied(const ACharacter* DeadCharacter)
 	
 	UGameplayStatics::OpenLevel(DeadCharacter, FName(SavedGame->MapAssetName));
 }
+
+void AMainGameModeBase::SetSelectedCharacterPreset(ECharacterGenderPreset Preset)
+{
+	if (ULoadScreenSaveGame* SaveData = RetrieveInGameSaveData())
+	{
+		SaveData->SelectedCharacterPreset = Preset;
+		SaveGameProgress(SaveData);
+	}
+}
