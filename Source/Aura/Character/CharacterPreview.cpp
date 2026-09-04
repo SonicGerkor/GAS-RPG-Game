@@ -5,6 +5,7 @@
 #include "Aura/AbilitySystem/MainAbilitySystemComponent.h"
 #include "Aura/AbilitySystem/MainAbilitySystemLibrary.h"
 #include "Aura/AbilitySystem/MainAttributeSet.h"
+#include "Aura/Player/MainPlayerState.h"
 
 ACharacterPreview::ACharacterPreview()
 {	
@@ -30,8 +31,12 @@ void ACharacterPreview::InitAbilityActorInfo()
 {
 	Super::InitAbilityActorInfo();
 	
+	AMainPlayerState* MainPlayerState = GetPlayerState<AMainPlayerState>();
+	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UMainAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
+	
+	OnASCRegistered.Broadcast(AbilitySystemComponent);
 }
 
 void ACharacterPreview::InitializeDefaultAttributes() const

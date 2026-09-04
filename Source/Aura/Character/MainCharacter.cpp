@@ -251,8 +251,8 @@ void AMainCharacter::SaveProgress_Implementation(const FName& CheckpointTag)
 	
 	ULoadScreenSaveGame* SaveData = MainGameMode->RetrieveInGameSaveData();
 	if (!IsValid(SaveData)) return;
-	
-	AMainPlayerState* MainPlayerState = Cast<AMainPlayerState>(GetPlayerState());
+
+	const AMainPlayerState* MainPlayerState = Cast<AMainPlayerState>(GetPlayerState());
 	if (!IsValid(MainPlayerState)) return;
 	
 	SaveData->PlayerLevel = MainPlayerState->GetPlayerLevel();

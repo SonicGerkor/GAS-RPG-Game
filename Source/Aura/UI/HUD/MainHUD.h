@@ -28,7 +28,6 @@ public:
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& Params);
 	USpellMenuWidgetController* GetSpellMenuWidgetController(const FWidgetControllerParams& Params);
 	UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const FWidgetControllerParams& Params);
-	UCharSelectionWidgetController* GetCharacterSelectionWidgetController(const FWidgetControllerParams& Params);
 	
 private:
 	
