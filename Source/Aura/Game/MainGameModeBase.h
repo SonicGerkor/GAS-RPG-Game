@@ -52,6 +52,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Maps")
 	FString StartingMapName;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	bool bShouldShowOverlayHUD = true;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Maps")
 	FName DefaultPlayerStartTag;
 	
