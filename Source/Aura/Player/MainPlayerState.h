@@ -40,7 +40,11 @@ public:
 	void SetXP(int32 NewXP);
 	
 	FORCEINLINE int32 GetAttributePoints() const { return AttributePoints; }
+	
+	UFUNCTION(BlueprintCallable)
 	void SetAttributePoints(int32 NewAttributePoints);
+	
+	UFUNCTION(BlueprintCallable)
 	void AddToAttributePoints(int32 NewAttributePoints);
 	
 	FORCEINLINE int32 GetSpellPoints() const { return SpellPoints; }

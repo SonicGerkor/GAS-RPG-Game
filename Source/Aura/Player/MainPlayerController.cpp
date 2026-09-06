@@ -15,11 +15,13 @@
 #include "Aura/Input/MainInputComponent.h"
 #include "Aura/AbilitySystem/MainAbilitySystemComponent.h"
 #include "Aura/Actor/MagicCircle.h"
+#include "Aura/Game/MainGameModeBase.h"
 #include "Aura/Interaction/EnemyInterface.h"
 #include "Aura/UI/Widget/DamageTextComponent.h"
 #include "Components/DecalComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 
 AMainPlayerController::AMainPlayerController()
 {
@@ -39,13 +41,17 @@ void AMainPlayerController::BeginPlay()
 		Subsystem->AddMappingContext(MainContext, 0);	
 	}
 	
-	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Default;
+	const AMainGameModeBase* MainGameMode = Cast<AMainGameModeBase>(UGameplayStatics::GetGameMode(this));
+	if (!IsValid(MainGameMode) || MainGameMode->bShouldShowOverlayHUD)
+	{
+		bShowMouseCursor = true;
+		DefaultMouseCursor = EMouseCursor::Default;
 	
-	FInputModeGameAndUI InputModeData;
-	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	InputModeData.SetHideCursorDuringCapture(false);
-	SetInputMode(InputModeData);
+		FInputModeGameAndUI InputModeData;
+		InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		InputModeData.SetHideCursorDuringCapture(false);
+		SetInputMode(InputModeData);
+	}
 }
 
 void AMainPlayerController::PlayerTick(float DeltaTime)

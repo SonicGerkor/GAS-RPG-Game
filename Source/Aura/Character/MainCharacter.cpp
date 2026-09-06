@@ -358,9 +358,13 @@ void AMainCharacter::InitAbilityActorInfo()
 	
 	if (AMainPlayerController* MainPlayerController = Cast<AMainPlayerController>(GetController()))
 	{
-		if (AMainHUD* MainHUD = Cast<AMainHUD>(MainPlayerController->GetHUD()))
+		const AMainGameModeBase* MainGameMode = Cast<AMainGameModeBase>(UGameplayStatics::GetGameMode(this));
+		if (IsValid(MainGameMode) && MainGameMode->bShouldShowOverlayHUD)
 		{
-			MainHUD->InitOverlay(MainPlayerController, MainPlayerState, AbilitySystemComponent, AttributeSet);
+			if (AMainHUD* MainHUD = Cast<AMainHUD>(MainPlayerController->GetHUD()))
+			{
+				MainHUD->InitOverlay(MainPlayerController, MainPlayerState, AbilitySystemComponent, AttributeSet);
+			}	
 		}
 	}
 }
