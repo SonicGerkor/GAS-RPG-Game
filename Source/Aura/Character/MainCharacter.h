@@ -48,6 +48,9 @@ public:
 	virtual void HideMagicCircle_Implementation() override;
 	virtual void SaveProgress_Implementation(const FName& CheckpointTag) override;
 	
+	UFUNCTION(BlueprintCallable, Category = "Character Selection")
+	void SaveAttributesToSlot() const;
+	
 	virtual void OnRep_Stunned() override;
 	virtual void OnRep_Burned() override;
 	

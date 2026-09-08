@@ -13,12 +13,12 @@ void UMVVM_LoadScreen::InitializeLoadSlots()
 	LoadSlot_0->LoadSlotIndex = 0;
 	LoadSlot_1 = NewObject<UMVVM_LoadSlot>(this, LoadSlotViewModelClass);
 	LoadSlot_1->LoadSlotName = FString("SaveSlot1");
-	LoadSlot_0->LoadSlotIndex = 1;
+	LoadSlot_1->LoadSlotIndex = 1;
 	LoadSlot_2 = NewObject<UMVVM_LoadSlot>(this, LoadSlotViewModelClass);
 	LoadSlot_2->LoadSlotName = FString("SaveSlot2");
-	LoadSlot_0->LoadSlotIndex = 2;
+	LoadSlot_2->LoadSlotIndex = 2;
 	LoadSlot_3 = NewObject<UMVVM_LoadSlot>(this, LoadSlotViewModelClass);
-	LoadSlot_0->LoadSlotIndex = 3;
+	LoadSlot_3->LoadSlotIndex = 3;
 	LoadSlot_3->LoadSlotName = FString("SaveSlot3");
 	
 	LoadSlots.Add(0, LoadSlot_0);

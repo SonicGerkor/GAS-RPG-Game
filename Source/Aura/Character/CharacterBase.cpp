@@ -122,6 +122,10 @@ float ACharacterBase::TakeDamage(float DamageAmount, struct FDamageEvent const& 
 FVector ACharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
 	const FMainGameplayTags& GameplayTags = FMainGameplayTags::Get(); 
+	if (bIsMainPlayer)
+	{
+		return GetMesh()->GetSocketLocation(HandMagicSocketName);
+	}
 	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(Weapon))
 	{
 		return Weapon->GetSocketLocation(WeaponTipSocketName);	

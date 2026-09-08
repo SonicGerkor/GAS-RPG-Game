@@ -46,6 +46,8 @@ AMainCharacter::AMainCharacter()
 	LevelUpNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LevelUpNiagaraComponent");
 	LevelUpNiagaraComponent->SetupAttachment(GetRootComponent());
 	LevelUpNiagaraComponent->bAutoActivate = false;
+	
+	bIsMainPlayer = true;
 }
 
 void AMainCharacter::PossessedBy(AController* NewController)
@@ -293,6 +295,28 @@ void AMainCharacter::SaveProgress_Implementation(const FName& CheckpointTag)
 	
 	MainASC->ForEachAbility(SaveAbilityDelegate);
 	
+	MainGameMode->SaveGameProgress(SaveData);
+}
+
+void AMainCharacter::SaveAttributesToSlot() const
+{
+	AMainGameModeBase* MainGameMode = Cast<AMainGameModeBase>(UGameplayStatics::GetGameMode(this));
+	if (!IsValid(MainGameMode)) return;
+	
+	ULoadScreenSaveGame* SaveData = MainGameMode->RetrieveInGameSaveData();
+	if (!IsValid(SaveData)) return;
+
+	const AMainPlayerState* MainPlayerState = Cast<AMainPlayerState>(GetPlayerState());
+	if (!IsValid(MainPlayerState)) return;
+	
+	SaveData->AttributePoints = MainPlayerState->GetAttributePoints();
+	SaveData->SpellPoints = MainPlayerState->GetSpellPoints();
+	
+	SaveData->Strength = UMainAttributeSet::GetStrengthAttribute().GetNumericValue(GetAttributeSet());
+	SaveData->Intelligence = UMainAttributeSet::GetIntelligenceAttribute().GetNumericValue(GetAttributeSet());
+	SaveData->Resilience = UMainAttributeSet::GetResilienceAttribute().GetNumericValue(GetAttributeSet());
+	SaveData->Vigor = UMainAttributeSet::GetVigorAttribute().GetNumericValue(GetAttributeSet());
+
 	MainGameMode->SaveGameProgress(SaveData);
 }
 
