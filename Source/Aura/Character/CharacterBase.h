@@ -95,9 +95,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Combat")
-	bool bIsMainPlayer = false;
-	
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;
 	

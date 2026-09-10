@@ -39,8 +39,6 @@ AEnemyCharacter::AEnemyCharacter()
 	AttributeSet = CreateDefaultSubobject<UMainAttributeSet>("AttributeSet");
 	
 	BaseWalkSpeed = 250.f;
-	
-	bIsMainPlayer = false;
 }
 
 void AEnemyCharacter::BeginPlay()

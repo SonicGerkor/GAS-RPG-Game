@@ -46,8 +46,6 @@ AMainCharacter::AMainCharacter()
 	LevelUpNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LevelUpNiagaraComponent");
 	LevelUpNiagaraComponent->SetupAttachment(GetRootComponent());
 	LevelUpNiagaraComponent->bAutoActivate = false;
-	
-	bIsMainPlayer = true;
 }
 
 void AMainCharacter::PossessedBy(AController* NewController)
