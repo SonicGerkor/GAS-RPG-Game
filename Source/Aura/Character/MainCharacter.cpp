@@ -96,10 +96,13 @@ void AMainCharacter::LoadProgress()
 	AMainPlayerState* MainPlayerState = Cast<AMainPlayerState>(GetPlayerState());
 	if (!IsValid(MainPlayerState)) return;
 	
+	// Startup abilities (like GA_ListenForEvents) are baseline behavior, not player
+	// progress - grant them every time, regardless of bFirstTime.
+	AddCharacterAbilities();
+	
 	if (SaveData->bFirstTime)
 	{
 		InitializeDefaultAttributes();
-		AddCharacterAbilities();
 	}
 	else
 	{
