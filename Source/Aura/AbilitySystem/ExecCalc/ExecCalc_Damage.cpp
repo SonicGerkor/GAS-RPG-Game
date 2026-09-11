@@ -100,6 +100,31 @@ void UExecCalc_Damage::DetermineDebuff(const FGameplayEffectCustomExecutionParam
 	}
 }
 
+float UExecCalc_Damage::ApplyDamageReductionByHaloOfProtection(
+	float Damage, 
+	const int32 TargetLevel,
+	const UAbilitySystemComponent* TargetASC, 
+	const UCharacterClassInfo* TargetCharacterClassInfo) const
+{
+	const FMainGameplayTags& AbilityTags = FMainGameplayTags::Get();
+	if (!TargetASC || !TargetASC->HasMatchingGameplayTag(AbilityTags.Abilities_Passive_Protection) ||
+		!TargetCharacterClassInfo || !TargetCharacterClassInfo->DamageCalculationCoefficients)
+	{
+		return Damage;
+	}
+
+	const FRealCurve* DamageReductionCurve = TargetCharacterClassInfo->DamageCalculationCoefficients->FindCurve(
+		FName("HaloOfProtection"), FString());
+
+	if (DamageReductionCurve)
+	{
+		const float DamageReductionPercent = DamageReductionCurve->Eval(TargetLevel);
+		Damage *= 1.f - DamageReductionPercent / 100.f;
+	}
+
+	return Damage;
+}
+
 void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const
 {
 	TMap<FGameplayTag, FGameplayEffectAttributeCaptureDefinition> TagsToCaptureDefs;
@@ -218,6 +243,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	SourceArmorPenetration = FMath::Max<float>(SourceArmorPenetration, 0.f);
 
 	const UCharacterClassInfo* CharacterClassInfo = UMainAbilitySystemLibrary::GetCharacterClassInfo(SourceAvatar);
+	const UCharacterClassInfo* TargetCharacterClassInfo = UMainAbilitySystemLibrary::GetCharacterClassInfo(TargetAvatar);
 	// Default Values
 	float ArmorPenetrationCoefficient = 0.25f;
 	float EffectiveArmorCoefficient = 0.33f;
@@ -260,6 +286,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	const bool bIsCriticalHit = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
 	UMainAbilitySystemLibrary::SetIsCriticalHit(EffectContextHandle, bIsCriticalHit);
 	Damage = !bIsCriticalHit ? Damage : (Damage * 2.f) + SourceCriticalHitDamage;
+	
+	Damage = ApplyDamageReductionByHaloOfProtection(Damage, TargetPlayerLevel, TargetASC, TargetCharacterClassInfo);
 
 	const FGameplayModifierEvaluatedData EvaluatedData(UMainAttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage);
 	OutExecutionOutput.AddOutputModifier(EvaluatedData);

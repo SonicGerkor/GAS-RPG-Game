@@ -238,6 +238,7 @@ private:
 	void HandleIncomingDamage(const FEffectProperties& Props);
 	void HandleIncomingXP(const FEffectProperties& Props);
 	void Debuff(const FEffectProperties& Props);
+	void Siphon(const FString& Attribute, float Damage, const FEffectProperties& Props);
 	
 	bool bTopOffHealth = false;
 	bool bTopOffMana = false;
