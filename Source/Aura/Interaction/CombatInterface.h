@@ -48,6 +48,7 @@ class AURA_API ICombatInterface
 public:
 	
 	virtual void Die(const FVector& DeathImpulse) = 0;
+	virtual void Injure(const bool bShouldInjure) = 0;
 	virtual FOnASCRegistered& GetOnASCRegisteredDelegate() = 0;
 	virtual FOnDeath& GetOnDeathDelegate() = 0;
 	virtual FOnDamageSignature& GetOnDamageSignature() = 0;
@@ -99,6 +100,4 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetIsBeingShocked(bool bInShock);
-	
-	
 };

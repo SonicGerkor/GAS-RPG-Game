@@ -186,6 +186,12 @@ void UMainAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 			{
 				Props.TargetCharacter->LaunchCharacter(KnockbackForce, true, true);
 			}
+			
+			if (ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor))
+			{
+				const bool bShouldInjure = GetHealth() < (GetMaxHealth() * 0.5f);
+				CombatInterface->Injure(bShouldInjure);
+			}
 		}
 		const bool bBlocked = UMainAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
 		const bool bCriticalHit = UMainAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);

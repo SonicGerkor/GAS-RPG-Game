@@ -22,10 +22,12 @@ public:
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+	virtual void Tick(float DeltaSeconds) override;
 	
 	// Combat Interface
 	virtual int32 GetPlayerLevel_Implementation() override;
 	virtual void Die(const FVector& DeathImpulse) override;
+	virtual void Injure(const bool bShouldInjure) override;
 	
 	UPROPERTY(EditDefaultsOnly)
 	float DeathTime = 5.f;

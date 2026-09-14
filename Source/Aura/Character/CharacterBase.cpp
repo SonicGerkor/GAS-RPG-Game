@@ -64,6 +64,11 @@ void ACharacterBase::Die(const FVector& DeathImpulse)
 	MulticastHandleDeath(DeathImpulse);
 }
 
+void ACharacterBase::Injure(const bool bShouldInjure)
+{
+	bInjured = bShouldInjure;
+}
+
 void ACharacterBase::MulticastHandleDeath_Implementation(const FVector& DeathImpulse)
 {
 	if (DeathSound) UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());

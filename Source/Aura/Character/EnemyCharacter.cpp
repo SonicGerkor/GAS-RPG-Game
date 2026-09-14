@@ -123,6 +123,11 @@ void AEnemyCharacter::Die(const FVector& DeathImpulse)
 	Super::Die(DeathImpulse);
 }
 
+void AEnemyCharacter::Injure(const bool bShouldInjure)
+{
+	// DO NOTHING FOR NOW
+}
+
 void AEnemyCharacter::SetCombatTarget_Implementation(AActor* InCombatTarget)
 {
 	CombatTarget = InCombatTarget;

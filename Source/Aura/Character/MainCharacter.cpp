@@ -70,6 +70,13 @@ void AMainCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+void AMainCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+	
+}
+
 void AMainCharacter::LoadProgress()
 {
 	AMainGameModeBase* MainGameMode = Cast<AMainGameModeBase>(UGameplayStatics::GetGameMode(this));
@@ -144,6 +151,13 @@ void AMainCharacter::Die(const FVector& DeathImpulse)
 	
 	GetWorldTimerManager().SetTimer(DeathTimerHandle, DeathTimerDelegate, DeathTime, false);
 	TopDownCameraComponent->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+}
+
+void AMainCharacter::Injure(const bool bShouldInjure)
+{
+	Super::Injure(bShouldInjure);
+	
+	GetCharacterMovement()->MaxWalkSpeed = bShouldInjure ? BaseWalkSpeed * 0.3f : BaseWalkSpeed;
 }
 
 int32 AMainCharacter::GetAttributePoints_Implementation() const

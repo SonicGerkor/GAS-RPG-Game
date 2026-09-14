@@ -38,6 +38,7 @@ public:
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	
 	virtual void Die(const FVector& DeathImpulse) override;
+	virtual void Injure(const bool bShouldInjure) override;
 	
 	// Combat Interface
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
@@ -134,6 +135,9 @@ protected:
 	
 	UPROPERTY(BlueprintReadOnly)
 	bool bDead = false;
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool bInjured = false;
 	
 	// Dissolve Effects
 	
