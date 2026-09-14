@@ -16,7 +16,7 @@ FString UMainGameplayAbility::GetNextLevelDescription(const int32 Level)
 
 FString UMainGameplayAbility::GetLockedDescription(const int32 Level)
 {
-	return FString::Printf(TEXT("<Default>Spell Locked Until\nLevel: %d</>"), Level);
+	return FString::Printf(TEXT("<Title>Spell Locked</>\n<Default>Until Level: %d</>"), Level);
 }
 
 float UMainGameplayAbility::GetManaCost(const float InLevel) const
