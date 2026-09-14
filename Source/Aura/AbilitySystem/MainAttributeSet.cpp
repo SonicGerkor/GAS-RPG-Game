@@ -12,7 +12,6 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/Pawn.h"
 #include "GameplayEffectComponents/TargetTagsGameplayEffectComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 
 UMainAttributeSet::UMainAttributeSet()

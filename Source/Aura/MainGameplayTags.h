@@ -81,6 +81,7 @@ public:
 	FGameplayTag Abilities_Fire_MeteorShower;
 	FGameplayTag Abilities_Lightning_Electrocute;
 	FGameplayTag Abilities_Lightning_Storm;
+	FGameplayTag Abilities_Lightning_ShockWave;
 	FGameplayTag Abilities_Arcane_ArcaneShards;
 	
 	FGameplayTag Abilities_Passive_Protection;
@@ -120,6 +121,7 @@ public:
 	FGameplayTag Player_Block_CursorTrace;
 	
 	FGameplayTag GameplayCue_FireBlast;
+	FGameplayTag GameplayCue_ShockWave;
 	
 private:
 	

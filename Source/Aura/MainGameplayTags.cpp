@@ -114,6 +114,7 @@ void FMainGameplayTags::InitializeNativeGameplayTags()
 	
 	GameplayTags.Abilities_Lightning_Electrocute = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Lightning.Electrocute"), FString("Electrocute Ability Tag."));
 	GameplayTags.Abilities_Lightning_Storm = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Lightning.Storm"), FString("Lightning Storm Ability Tag."));
+	GameplayTags.Abilities_Lightning_ShockWave = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Lightning.ShockWave"), FString("Shockwave Ability Tag."));
 	
 	GameplayTags.Abilities_Arcane_ArcaneShards = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Arcane.ArcaneShards"), FString("Arcane Shards Ability Tag."));
 	
@@ -162,4 +163,5 @@ void FMainGameplayTags::InitializeNativeGameplayTags()
 	 * Gameplay Cues
 	 */
 	GameplayTags.GameplayCue_FireBlast = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("GameplayCue.FireBlast"), FString("Gameplay Cue for Fire Blast."));
+	GameplayTags.GameplayCue_ShockWave = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("GameplayCue.ShockWave"), FString("Gameplay Cue for Shock Wave."));
 }
