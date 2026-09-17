@@ -32,7 +32,7 @@ TArray<AMainShockWave*> UShockWave::SpawnShockWave()
 	
 	const FVector Forward = GetAvatarActorFromActorInfo()->GetActorForwardVector();
 	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
-	TArray<FRotator> Rotators = UMainAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, 180.f, NumShocks);
+	TArray<FRotator> Rotators = UMainAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, SpawnSpread, NumShocks);
 	
 	for (const FRotator& Rotator : Rotators)
 	{
@@ -41,7 +41,7 @@ TArray<AMainShockWave*> UShockWave::SpawnShockWave()
 		SpawnTransform.SetRotation(Rotator.Quaternion());
 		
 		AMainShockWave* ShockWave = GetWorld()->SpawnActorDeferred<AMainShockWave>(
-			FireBallClass, 
+			ShockWaveClass, 
 			SpawnTransform, 
 			GetOwningActorFromActorInfo(),
 			CurrentActorInfo->PlayerController->GetPawn(),

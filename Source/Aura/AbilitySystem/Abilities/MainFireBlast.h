@@ -26,6 +26,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "FireBlast")
 	int32 NumFireBalls = 12;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "FireBlast")
+	float SpawnSpread = 360.f;
+	
 private:
 	
 	UPROPERTY(EditDefaultsOnly)

@@ -23,8 +23,11 @@ public:
 	
 protected:
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "FireBlast")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "ShockWave")
 	int32 NumShocks = 8;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "ShockWave")
+	float SpawnSpread = 180.f;
 	
 private:
 	

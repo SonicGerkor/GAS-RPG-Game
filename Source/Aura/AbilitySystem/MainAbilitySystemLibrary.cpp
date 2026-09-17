@@ -486,7 +486,7 @@ int32 UMainAbilitySystemLibrary::GetXPRewardForClass(const UObject* WorldContext
 
 FGameplayEffectContextHandle UMainAbilitySystemLibrary::ApplyDamageEffect(const FDamageEffectParams& Params)
 {
-	const FMainGameplayTags& GameplayTags =FMainGameplayTags::Get();
+	const FMainGameplayTags& GameplayTags = FMainGameplayTags::Get();
 	const AActor* SourceAvatarActor = Params.SourceAbilitySystemComponent->GetAvatarActor();
 	
 	FGameplayEffectContextHandle EffectContextHandle = Params.SourceAbilitySystemComponent->MakeEffectContext();

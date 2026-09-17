@@ -6,10 +6,13 @@
 #include "Aura/MainGameplayTags.h"
 #include "Aura/AbilitySystem/MainAbilitySystemLibrary.h"
 #include "Components/AudioComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
 void AMainShockWave::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	ProjectileMovement->SetActive(false);
 	
 	StartShockwaveTimeline();
 }
@@ -36,7 +39,7 @@ void AMainShockWave::OnHit()
 	{
 		FGameplayCueParameters CueParams;
 		CueParams.Location = GetActorLocation();
-		UGameplayCueManager::ExecuteGameplayCue_NonReplicated(GetOwner(), FMainGameplayTags::Get().GameplayCue_FireBlast, CueParams);	
+		UGameplayCueManager::ExecuteGameplayCue_NonReplicated(GetOwner(), FMainGameplayTags::Get().GameplayCue_ShockWave, CueParams);	
 	}
 	
 	if (LoopSoundComponent)

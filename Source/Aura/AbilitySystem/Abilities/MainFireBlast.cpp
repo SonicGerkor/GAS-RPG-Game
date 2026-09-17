@@ -32,7 +32,7 @@ TArray<AMainFireBall*> UMainFireBlast::SpawnFireBalls()
 	
 	const FVector Forward = GetAvatarActorFromActorInfo()->GetActorForwardVector();
 	const FVector Location = GetAvatarActorFromActorInfo()->GetActorLocation();
-	TArray<FRotator> Rotators = UMainAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, 360.f, NumFireBalls);
+	TArray<FRotator> Rotators = UMainAbilitySystemLibrary::EvenlySpacedRotators(Forward, FVector::UpVector, SpawnSpread, NumFireBalls);
 	
 	for (const FRotator& Rotator : Rotators)
 	{
@@ -49,8 +49,8 @@ TArray<AMainFireBall*> UMainFireBlast::SpawnFireBalls()
 		
 		FireBall->DamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
 		FireBall->ReturnToActor = GetAvatarActorFromActorInfo();
-		
-		FDamageEffectParams ExplosionDamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
+
+		const FDamageEffectParams ExplosionDamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
 		FireBall->SetOwner(GetAvatarActorFromActorInfo());
 		FireBall->ExplosionDamageParams = ExplosionDamageEffectParams;
 		FireBalls.Add(FireBall);
