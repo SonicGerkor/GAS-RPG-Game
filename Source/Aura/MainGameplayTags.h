@@ -83,6 +83,8 @@ public:
 	FGameplayTag Abilities_Lightning_Storm;
 	FGameplayTag Abilities_Lightning_ShockWave;
 	FGameplayTag Abilities_Arcane_ArcaneShards;
+	FGameplayTag Abilities_Arcane_AcidRain;
+	FGameplayTag Abilities_Arcane_ArcaneBlast;
 	
 	FGameplayTag Abilities_Passive_Protection;
 	FGameplayTag Abilities_Passive_HealthSiphon;

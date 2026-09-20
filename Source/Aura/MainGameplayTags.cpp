@@ -117,6 +117,8 @@ void FMainGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Lightning_ShockWave = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Lightning.ShockWave"), FString("Shockwave Ability Tag."));
 	
 	GameplayTags.Abilities_Arcane_ArcaneShards = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Arcane.ArcaneShards"), FString("Arcane Shards Ability Tag."));
+	GameplayTags.Abilities_Arcane_AcidRain = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Arcane.AcidRain"), FString("Acid Rain Ability Tag."));
+	GameplayTags.Abilities_Arcane_ArcaneBlast = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Arcane.ArcaneBlast"), FString("Arcane Blast Ability Tag."));
 	
 	/*
 	 * Passive Spells.
