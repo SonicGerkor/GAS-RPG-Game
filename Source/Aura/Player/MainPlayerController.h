@@ -8,6 +8,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MainPlayerController.generated.h"
 
+class UDialogueWindow;
 class AMagicCircle;
 class UNiagaraSystem;
 class UDamageTextComponent;
@@ -46,6 +47,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void HideMagicCircle();
 	
+	UFUNCTION(BlueprintCallable, Category = "Dialogue")
+	void OpenDialogueWidget(AActor* NPC, const FText& Speaker, const FText& Line);
+
+	UFUNCTION(BlueprintCallable, Category = "Dialogue")
+	void UpdateDialogueLine(const FText& Speaker, const FText& Line);
+
+	UFUNCTION(BlueprintCallable, Category = "Dialogue")
+	void AdvanceActiveDialogue();
+
+	UFUNCTION(BlueprintCallable, Category = "Dialogue")
+	void CloseDialogueWidget();
+	
 protected:
 	
 	virtual void BeginPlay() override;
@@ -67,11 +80,25 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> ShiftAction;
 	
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> InteractAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Dialogue")
+	TSubclassOf<UDialogueWindow> DialogueWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UDialogueWindow> ActiveDialogueWidget;
+
+	UPROPERTY()
+	TObjectPtr<AActor> ActiveDialogueNPC;
+	
 	void ShiftPressed() { bShiftKeyDown = true; }
 	void ShiftReleased() { bShiftKeyDown = false; }
 	bool bShiftKeyDown = false;
 	
 	void Move(const FInputActionValue& InputActionValue);
+	
+	void Interact();
 	
 	FHitResult CursorHit;
 	void CursorTrace();

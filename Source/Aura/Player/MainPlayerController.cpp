@@ -16,7 +16,9 @@
 #include "Aura/AbilitySystem/MainAbilitySystemComponent.h"
 #include "Aura/Actor/MagicCircle.h"
 #include "Aura/Game/MainGameModeBase.h"
+#include "Aura/Interaction/DialogueInterface.h"
 #include "Aura/Interaction/EnemyInterface.h"
+#include "Aura/UI/Dialogue/DialogueWindow.h"
 #include "Aura/UI/Widget/DamageTextComponent.h"
 #include "Components/DecalComponent.h"
 #include "Engine/World.h"
@@ -145,7 +147,8 @@ void AMainPlayerController::CursorTrace()
 	if (!CursorHit.bBlockingHit) return;
 	
 	LastActor = ThisActor;
-	if (IsValid(CursorHit.GetActor()) && CursorHit.GetActor()->Implements<UHighlightInterface>())
+	const AActor* HitActor = CursorHit.GetActor();
+	if (IsValid(HitActor) && HitActor->Implements<UHighlightInterface>())
 	{
 		ThisActor = CursorHit.GetActor();
 	}
@@ -269,6 +272,20 @@ void AMainPlayerController::Move(const FInputActionValue& InputActionValue)
 	}
 }
 
+void AMainPlayerController::Interact()
+{
+	if (IsValid(ActiveDialogueWidget))
+	{
+		ActiveDialogueWidget->RequestAdvance();
+		return;
+	}
+
+	if (IsValid(ThisActor) && ThisActor->Implements<UDialogueInterface>())
+	{
+		IDialogueInterface::Execute_StartDialogue(ThisActor);
+	}
+}
+
 void AMainPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
@@ -278,7 +295,51 @@ void AMainPlayerController::SetupInputComponent()
 	MainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	MainInputComponent->BindAction(ShiftAction, ETriggerEvent::Started, this, &ThisClass::ShiftPressed);
 	MainInputComponent->BindAction(ShiftAction, ETriggerEvent::Completed, this, &ThisClass::ShiftReleased);
+	MainInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &ThisClass::Interact);
 	MainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
+}
+
+void AMainPlayerController::OpenDialogueWidget(AActor* NPC, const FText& Speaker, const FText& Line)
+{
+	ActiveDialogueNPC = NPC;
+	if (!IsValid(ActiveDialogueWidget) && DialogueWidgetClass)
+	{
+		ActiveDialogueWidget = CreateWidget<UDialogueWindow>(this, DialogueWidgetClass);
+		ActiveDialogueWidget->SetDesiredSizeInViewport(FVector2D(400.f, 150.f));
+		
+		int32 ViewportX = 0;
+		int32 ViewportY = 0;
+		GetViewportSize(ViewportX, ViewportY);
+		ActiveDialogueWidget->SetPositionInViewport(FVector2D(ViewportX * 0.5f - 200.f, ViewportY * 0.6f));
+		ActiveDialogueWidget->AddToViewport();
+	}
+	ActiveDialogueWidget->DisplayLine(Speaker, Line);
+}
+
+void AMainPlayerController::UpdateDialogueLine(const FText& Speaker, const FText& Line)
+{
+	if (IsValid(ActiveDialogueWidget))
+	{
+		ActiveDialogueWidget->DisplayLine(Speaker, Line);
+	}
+}
+
+void AMainPlayerController::AdvanceActiveDialogue()
+{
+	if (IsValid(ActiveDialogueNPC) && ActiveDialogueNPC->Implements<UDialogueInterface>())
+	{
+		IDialogueInterface::Execute_AdvanceDialogue(ActiveDialogueNPC);
+	}
+}
+
+void AMainPlayerController::CloseDialogueWidget()
+{
+	if (IsValid(ActiveDialogueWidget))
+	{
+		ActiveDialogueWidget->RemoveFromParent();
+		ActiveDialogueWidget = nullptr;
+	}
+	ActiveDialogueNPC = nullptr;
 }
 
 void AMainPlayerController::HighlightActor(AActor* InActor)
