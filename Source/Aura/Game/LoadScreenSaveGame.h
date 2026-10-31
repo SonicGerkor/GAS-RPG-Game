@@ -101,7 +101,10 @@ public:
 	FString PlayerName = FString("DefaultPlayerName");
 	
 	UPROPERTY()
-	ECharacterGenderPreset SelectedCharacterPreset = ECharacterGenderPreset::Male; 
+	ECharacterGenderPreset SelectedCharacterPreset = ECharacterGenderPreset::Male;
+	
+	UPROPERTY()
+	int32 StoryStage = 0;
 	
 	UPROPERTY()
 	FString MapName = FString("DefaultMapName");

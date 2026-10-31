@@ -31,6 +31,13 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Dialogue")
 	bool bIsTalking = false;
 	
+	// Stage to set when this NPC's dialogue finishes. 0 = doesn't change the story stage.
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dialogue")
+	int32 StageOnDialogueComplete = 0;
+	
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Dialogue")
+	bool bHasCompletedDialogue = false;
+	
 	UFUNCTION(BlueprintImplementableEvent, Category = "Dialogue")
 	void OnDialogueStateChanged(bool bTalking);
 

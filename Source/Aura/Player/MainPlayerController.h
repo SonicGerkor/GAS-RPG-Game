@@ -17,6 +17,7 @@ class UMainAbilitySystemComponent;
 class UMainInputConfig;
 class UInputMappingContext;
 class UInputAction;
+class AHubPortal;
 struct FGameplayTag;
 struct FInputActionValue;
 
@@ -59,6 +60,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Dialogue")
 	void CloseDialogueWidget();
 	
+	void SetNearbyPortal(AHubPortal* Portal) { NearbyPortal = Portal; }
+	void ClearNearbyPortal(AHubPortal* Portal) { if (NearbyPortal == Portal) NearbyPortal = nullptr; }
+	
 protected:
 	
 	virtual void BeginPlay() override;
@@ -91,6 +95,9 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<AActor> ActiveDialogueNPC;
+	
+	UPROPERTY()
+	TObjectPtr<AHubPortal> NearbyPortal;
 	
 	void ShiftPressed() { bShiftKeyDown = true; }
 	void ShiftReleased() { bShiftKeyDown = false; }

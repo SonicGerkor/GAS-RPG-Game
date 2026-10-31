@@ -14,6 +14,7 @@
 #include "Components/SplineComponent.h"
 #include "Aura/Input/MainInputComponent.h"
 #include "Aura/AbilitySystem/MainAbilitySystemComponent.h"
+#include "Aura/Actor/HubPortal.h"
 #include "Aura/Actor/MagicCircle.h"
 #include "Aura/Game/MainGameModeBase.h"
 #include "Aura/Interaction/DialogueInterface.h"
@@ -284,6 +285,11 @@ void AMainPlayerController::Interact()
 	{
 		IDialogueInterface::Execute_StartDialogue(ThisActor);
 	}
+	
+	if (IsValid(NearbyPortal))
+	{
+		NearbyPortal->Interact();
+	}
 }
 
 void AMainPlayerController::SetupInputComponent()
@@ -305,7 +311,7 @@ void AMainPlayerController::OpenDialogueWidget(AActor* NPC, const FText& Speaker
 	if (!IsValid(ActiveDialogueWidget) && DialogueWidgetClass)
 	{
 		ActiveDialogueWidget = CreateWidget<UDialogueWindow>(this, DialogueWidgetClass);
-		ActiveDialogueWidget->SetDesiredSizeInViewport(FVector2D(400.f, 150.f));
+		// ActiveDialogueWidget->SetDesiredSizeInViewport(FVector2D(400.f, 150.f));
 		
 		int32 ViewportX = 0;
 		int32 ViewportY = 0;

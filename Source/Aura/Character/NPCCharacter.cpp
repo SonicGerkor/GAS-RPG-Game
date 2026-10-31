@@ -2,7 +2,10 @@
 
 #include "NPCCharacter.h"
 #include "Aura/Aura.h"
+#include "Aura/Game/LoadScreenSaveGame.h"
+#include "Aura/Game/MainGameModeBase.h"
 #include "Aura/Player/MainPlayerController.h"
+#include "Kismet/GameplayStatics.h"
 
 ANPCCharacter::ANPCCharacter()
 {
@@ -60,9 +63,25 @@ void ANPCCharacter::AdvanceDialogue_Implementation()
 void ANPCCharacter::EndDialogue_Implementation()
 {
 	bIsTalking = false;
+	bHasCompletedDialogue = true;
 	if (AMainPlayerController* PC = Cast<AMainPlayerController>(GetWorld()->GetFirstPlayerController()))
 	{
 		PC->CloseDialogueWidget();
+	}
+	
+	if (StageOnDialogueComplete > 0)
+	{
+		if (AMainGameModeBase* GM = Cast<AMainGameModeBase>(UGameplayStatics::GetGameMode(this)))
+		{
+			if (ULoadScreenSaveGame* SaveData = GM->RetrieveInGameSaveData())
+			{
+				if (SaveData->StoryStage < StageOnDialogueComplete)
+				{
+					SaveData->StoryStage = StageOnDialogueComplete;
+					GM->SaveGameProgress(SaveData);
+				}
+			}
+		}
 	}
 	OnDialogueStateChanged(bIsTalking);
 }
